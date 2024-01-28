@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -18,16 +19,19 @@ public class MainForm : Form
     private CheckedListBox printerListBox;
     private CheckedListBox filamentListBox;
     private CheckedListBox printListBox;
+    private ComboBox brandComboBox;
 
-    public MainForm()
-    {
-        InitializeComponents();
-        DisplayProfiles("printer", printerListBox);
-        DisplayProfiles("filament", filamentListBox);
-        DisplayProfiles("print", printListBox);
+public MainForm()
+{
+    InitializeComponents();
+    DisplayProfiles("printer", printerListBox);
+    DisplayProfiles("filament", filamentListBox);
+    DisplayProfilesByBrand("printer", printerListBox, brandComboBox.SelectedItem?.ToString());
+    DisplayProfiles("print", printListBox);
+    UpdateBrandComboBox();  // This should be called after DisplayProfilesByBrand
+    this.Text = "TH3D EZProfiles for PrusaSlicer";
+}
 
-        this.Text = "TH3D EZProfiles for PrusaSlicer";
-    }
 
     private void InitializeComponents()
     {
@@ -39,6 +43,10 @@ public class MainForm : Form
         filamentListBox = CreateCheckedListBox("Filament Profiles", 200, 10);
         printListBox = CreateCheckedListBox("Print Profiles", 400, 10);
 
+        brandComboBox = new ComboBox();
+        brandComboBox.Location = new System.Drawing.Point(200, 400);
+        brandComboBox.SelectedIndexChanged += BrandComboBox_SelectedIndexChanged;
+
         Button installButton = new Button();
         installButton.Text = "Install Selected Profiles";
         installButton.Location = new System.Drawing.Point(10, 400);
@@ -46,10 +54,11 @@ public class MainForm : Form
 
         Button closeButton = new Button();
         closeButton.Text = "Close";
-        closeButton.Location = new System.Drawing.Point(150, 400);
+        closeButton.Location = new System.Drawing.Point(350, 400);
         closeButton.Click += CloseButton_Click;
 
         this.Controls.Add(installButton);
+        this.Controls.Add(brandComboBox);
         this.Controls.Add(closeButton);
     }
 
@@ -87,6 +96,57 @@ public class MainForm : Form
         {
             checkedListBox.Items.Add($"No {profileType} profiles found.", false);
         }
+    }
+
+    private void DisplayProfilesByBrand(string profileType, CheckedListBox checkedListBox, string brand)
+    {
+        if (brand != null)
+        {
+            string programFolderPath = AppDomain.CurrentDomain.BaseDirectory;
+            string profilesFolderPath = Path.Combine(programFolderPath, "profiles");
+            string profileFolderPath = Path.Combine(profilesFolderPath, profileType, brand);
+
+            if (Directory.Exists(profileFolderPath))
+            {
+                string[] profileFiles = Directory.GetFiles(profileFolderPath, "*.ini")
+                                                  .Select(Path.GetFileNameWithoutExtension)
+                                                  .ToArray();
+
+                checkedListBox.Items.Clear();
+                checkedListBox.Items.AddRange(profileFiles.Cast<object>().ToArray());
+            }
+            else
+            {
+                checkedListBox.Items.Clear();
+                checkedListBox.Items.Add($"No {profileType} profiles found for {brand}.", false);
+            }
+        }
+    }
+
+    private void LoadBrands()
+    {
+        string programFolderPath = AppDomain.CurrentDomain.BaseDirectory;
+        string profilesFolderPath = Path.Combine(programFolderPath, "profiles", "printer");
+
+        if (Directory.Exists(profilesFolderPath))
+        {
+            string[] brandFolders = Directory.GetDirectories(profilesFolderPath)
+                                            .Select(Path.GetFileName)
+                                            .ToArray();
+
+            brandComboBox.Items.AddRange(brandFolders);
+        }
+    }
+
+    private void UpdateBrandComboBox()
+    {
+        LoadBrands();
+        brandComboBox.SelectedIndex = 0; // Select the first brand by default
+    }
+
+    private void BrandComboBox_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        DisplayProfilesByBrand("printer", printerListBox, brandComboBox.SelectedItem?.ToString());
     }
 
     private void InstallButton_Click(object sender, EventArgs e)
