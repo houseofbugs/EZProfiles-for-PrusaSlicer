@@ -123,20 +123,24 @@ public MainForm()
         }
     }
 
-    private void LoadBrands()
+private void LoadBrands()
+{
+    string programFolderPath = AppDomain.CurrentDomain.BaseDirectory;
+    string profilesFolderPath = Path.Combine(programFolderPath, "profiles", "printer");
+
+    if (Directory.Exists(profilesFolderPath))
     {
-        string programFolderPath = AppDomain.CurrentDomain.BaseDirectory;
-        string profilesFolderPath = Path.Combine(programFolderPath, "profiles", "printer");
+        string[] brandFolders = Directory.GetDirectories(profilesFolderPath)
+                                        .Select(Path.GetFileName)
+                                        .Where(brand => brand.ToLower() != "custom")
+                                        .ToArray();
 
-        if (Directory.Exists(profilesFolderPath))
-        {
-            string[] brandFolders = Directory.GetDirectories(profilesFolderPath)
-                                            .Select(Path.GetFileName)
-                                            .ToArray();
-
-            brandComboBox.Items.AddRange(brandFolders);
-        }
+        brandComboBox.Items.AddRange(brandFolders);
+        // Add "Custom" brand manually at the end
+        brandComboBox.Items.Add("Custom");
     }
+}
+
 
     private void UpdateBrandComboBox()
     {
