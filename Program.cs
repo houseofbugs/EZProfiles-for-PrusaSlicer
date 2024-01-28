@@ -30,7 +30,7 @@ public class MainForm : Form
         DisplayProfiles("print", printListBox);
         UpdateBrandComboBox();
 
-        this.Text = "TH3D EZProfiles for PrusaSlicer";
+        this.Text = "TH3D EZProfiles for PrusaSlicer - V0.1";
     }
 
     private void InitializeComponents()
