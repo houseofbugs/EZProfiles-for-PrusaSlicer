@@ -39,22 +39,27 @@ public MainForm()
         this.FormBorderStyle = FormBorderStyle.FixedDialog;
         this.MaximizeBox = false;
 
-        printerListBox = CreateCheckedListBox("Printer Profiles", 10, 10);
-        filamentListBox = CreateCheckedListBox("Filament Profiles", 200, 10);
-        printListBox = CreateCheckedListBox("Print Profiles", 400, 10);
+        int controlWidth = (this.Size.Width - 30) / 3;
+
+        printerListBox = CreateCheckedListBox("Printer Profiles", 10, 10, controlWidth);
+        filamentListBox = CreateCheckedListBox("Filament Profiles", 10 + controlWidth, 10, controlWidth);
+        printListBox = CreateCheckedListBox("Print Profiles", 10 + (2 * controlWidth), 10, controlWidth);
 
         brandComboBox = new ComboBox();
-        brandComboBox.Location = new System.Drawing.Point(200, 400);
+        brandComboBox.Location = new System.Drawing.Point(10, 400);
+        brandComboBox.Width = controlWidth;
         brandComboBox.SelectedIndexChanged += BrandComboBox_SelectedIndexChanged;
 
         Button installButton = new Button();
         installButton.Text = "Install Selected Profiles";
-        installButton.Location = new System.Drawing.Point(10, 400);
+        installButton.Location = new System.Drawing.Point(10, 430);
+        installButton.Width = controlWidth;
         installButton.Click += InstallButton_Click;
 
         Button closeButton = new Button();
         closeButton.Text = "Close";
-        closeButton.Location = new System.Drawing.Point(350, 400);
+        closeButton.Location = new System.Drawing.Point(10 + (2 * controlWidth), 430);
+        closeButton.Width = controlWidth;
         closeButton.Click += CloseButton_Click;
 
         this.Controls.Add(installButton);
@@ -62,14 +67,14 @@ public MainForm()
         this.Controls.Add(closeButton);
     }
 
-    private CheckedListBox CreateCheckedListBox(string label, int x, int y)
+    private CheckedListBox CreateCheckedListBox(string label, int x, int y, int width)
     {
         Label listLabel = new Label();
         listLabel.Text = label;
         listLabel.Location = new System.Drawing.Point(x, y);
 
         CheckedListBox checkedListBox = new CheckedListBox();
-        checkedListBox.Size = new System.Drawing.Size(180, 300);
+        checkedListBox.Size = new System.Drawing.Size(width, 300);
         checkedListBox.Location = new System.Drawing.Point(x, y + 20);
 
         this.Controls.Add(listLabel);
@@ -140,7 +145,6 @@ private void LoadBrands()
         brandComboBox.Items.Add("Custom");
     }
 }
-
 
     private void UpdateBrandComboBox()
     {
