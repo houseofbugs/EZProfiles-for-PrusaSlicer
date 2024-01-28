@@ -177,11 +177,68 @@ public class MainForm : Form
             return;
         }
 
-        InstallProfiles("printer", printerListBox);
+        InstallPrinterProfiles("printer", printerListBox);
         InstallProfiles("filament", filamentListBox);
         InstallProfiles("print", printListBox);
 
         MessageBox.Show("Profiles installed successfully.");
+    }
+
+    private void InstallPrinterProfiles(string profileType, CheckedListBox checkedListBox)
+    {
+        string programFolderPath = AppDomain.CurrentDomain.BaseDirectory;
+        string profilesFolderPath = Path.Combine(programFolderPath, "profiles");
+        string destinationRootFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "PrusaSlicer", profileType);
+
+        if (Directory.Exists(profilesFolderPath))
+        {
+            for (int i = 0; i < checkedListBox.Items.Count; i++)
+            {
+                if (checkedListBox.GetItemChecked(i))
+                {
+                    string profile = checkedListBox.Items[i].ToString();
+                    string brand = brandComboBox.SelectedItem?.ToString();
+                    string sourceFolderPath = Path.Combine(profilesFolderPath, profileType, brand); // Source folder for printer profiles
+
+                    if (brand != null && Directory.Exists(sourceFolderPath))
+                    {
+                        string sourceFilePath = Path.Combine(sourceFolderPath, $"{profile}.ini");
+                        string destinationFolderPath = Path.Combine(destinationRootFolder);
+
+                        if (File.Exists(sourceFilePath))
+                        {
+                            string destinationFilePath = Path.Combine(destinationFolderPath, $"{profile}.ini");
+
+                            try
+                            {
+                                if (!Directory.Exists(destinationFolderPath))
+                                {
+                                    Directory.CreateDirectory(destinationFolderPath);
+                                }
+
+                                File.Copy(sourceFilePath, destinationFilePath, true);
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show($"Error copying profile '{profile}' to {destinationFolderPath}:\n{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show($"Profile file not found: {sourceFilePath}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Brand folder not found: {sourceFolderPath}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+        else
+        {
+            MessageBox.Show($"Profile folder not found: {profilesFolderPath}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
     }
 
     private void InstallProfiles(string profileType, CheckedListBox checkedListBox)
