@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Work\\GitHub\\EZProfiles-for-PrusaSlicer\\EZProfiles.csproj": {}
+    "d:\\Work\\GitHub\\EZProfiles-for-PrusaSlicer\\EZProfiles.csproj": {}
   },
   "projects": {
-    "D:\\Work\\GitHub\\EZProfiles-for-PrusaSlicer\\EZProfiles.csproj": {
+    "d:\\Work\\GitHub\\EZProfiles-for-PrusaSlicer\\EZProfiles.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Work\\GitHub\\EZProfiles-for-PrusaSlicer\\EZProfiles.csproj",
+        "projectUniqueName": "d:\\Work\\GitHub\\EZProfiles-for-PrusaSlicer\\EZProfiles.csproj",
         "projectName": "EZProfiles",
-        "projectPath": "D:\\Work\\GitHub\\EZProfiles-for-PrusaSlicer\\EZProfiles.csproj",
+        "projectPath": "d:\\Work\\GitHub\\EZProfiles-for-PrusaSlicer\\EZProfiles.csproj",
         "packagesPath": "C:\\Users\\timot\\.nuget\\packages\\",
-        "outputPath": "D:\\Work\\GitHub\\EZProfiles-for-PrusaSlicer\\obj\\",
+        "outputPath": "d:\\Work\\GitHub\\EZProfiles-for-PrusaSlicer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\timot\\AppData\\Roaming\\NuGet\\NuGet.Config"

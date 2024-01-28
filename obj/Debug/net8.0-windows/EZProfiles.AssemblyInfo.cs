@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EZProfiles")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cb5be529c6eafad6138fda8162afe51b3df32b53")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e787648b72ae3d78e04d8d67d8790e5d976e23b8")]
 [assembly: System.Reflection.AssemblyProductAttribute("EZProfiles")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EZProfiles")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

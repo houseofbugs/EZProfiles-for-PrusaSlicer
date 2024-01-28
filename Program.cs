@@ -21,17 +21,18 @@ public class MainForm : Form
     private CheckedListBox printListBox;
     private ComboBox brandComboBox;
 
-public MainForm()
-{
-    InitializeComponents();
-    DisplayProfiles("printer", printerListBox);
-    DisplayProfiles("filament", filamentListBox);
-    DisplayProfilesByBrand("printer", printerListBox, brandComboBox.SelectedItem?.ToString());
-    DisplayProfiles("print", printListBox);
-    UpdateBrandComboBox();  // This should be called after DisplayProfilesByBrand
-    this.Text = "TH3D EZProfiles for PrusaSlicer";
-}
+    public MainForm()
+    {
+        InitializeComponents();
+        LoadBrands();
+        DisplayProfiles("printer", printerListBox);
+        DisplayProfiles("filament", filamentListBox);
+        DisplayProfilesByBrand("printer", printerListBox, brandComboBox.SelectedItem?.ToString());
+        DisplayProfiles("print", printListBox);
+        UpdateBrandComboBox();
 
+        this.Text = "TH3D EZProfiles for PrusaSlicer";
+    }
 
     private void InitializeComponents()
     {
@@ -76,6 +77,18 @@ public MainForm()
         CheckedListBox checkedListBox = new CheckedListBox();
         checkedListBox.Size = new System.Drawing.Size(width, 300);
         checkedListBox.Location = new System.Drawing.Point(x, y + 20);
+        checkedListBox.CheckOnClick = true;  // Enable check on single click
+
+        // Handle the ItemCheck event to ensure checkboxes respond to single clicks
+        checkedListBox.ItemCheck += (sender, e) => 
+        {
+            // Handle the checkbox state change
+            if (e.Index >= 0 && e.Index < checkedListBox.Items.Count)
+            {
+                string profile = checkedListBox.Items[e.Index].ToString();
+                // You can perform additional actions here if needed
+            }
+        };
 
         this.Controls.Add(listLabel);
         this.Controls.Add(checkedListBox);
@@ -128,23 +141,23 @@ public MainForm()
         }
     }
 
-private void LoadBrands()
-{
-    string programFolderPath = AppDomain.CurrentDomain.BaseDirectory;
-    string profilesFolderPath = Path.Combine(programFolderPath, "profiles", "printer");
-
-    if (Directory.Exists(profilesFolderPath))
+    private void LoadBrands()
     {
-        string[] brandFolders = Directory.GetDirectories(profilesFolderPath)
-                                        .Select(Path.GetFileName)
-                                        .Where(brand => brand.ToLower() != "custom")
-                                        .ToArray();
+        string programFolderPath = AppDomain.CurrentDomain.BaseDirectory;
+        string profilesFolderPath = Path.Combine(programFolderPath, "profiles", "printer");
 
-        brandComboBox.Items.AddRange(brandFolders);
-        // Add "Custom" brand manually at the end
-        brandComboBox.Items.Add("Custom");
+        if (Directory.Exists(profilesFolderPath))
+        {
+            string[] brandFolders = Directory.GetDirectories(profilesFolderPath)
+                                            .Select(Path.GetFileName)
+                                            .Where(brand => brand.ToLower() != "custom")
+                                            .ToArray();
+
+            brandComboBox.Items.AddRange(brandFolders);
+            // Add "Custom" brand manually at the end
+            brandComboBox.Items.Add("Custom");
+        }
     }
-}
 
     private void UpdateBrandComboBox()
     {
