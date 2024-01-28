@@ -25,11 +25,12 @@ public class MainForm : Form
         DisplayProfiles("printer", printerListBox);
         DisplayProfiles("filament", filamentListBox);
         DisplayProfiles("print", printListBox);
+
+        this.Text = "TH3D EZProfiles for PrusaSlicer";
     }
 
     private void InitializeComponents()
     {
-        this.Text = "TH3D EZProfiles for PrusaSlicer";
         this.Size = new System.Drawing.Size(800, 500);
         this.FormBorderStyle = FormBorderStyle.FixedDialog;
         this.MaximizeBox = false;
@@ -43,7 +44,13 @@ public class MainForm : Form
         installButton.Location = new System.Drawing.Point(10, 400);
         installButton.Click += InstallButton_Click;
 
+        Button closeButton = new Button();
+        closeButton.Text = "Close";
+        closeButton.Location = new System.Drawing.Point(150, 400);
+        closeButton.Click += CloseButton_Click;
+
         this.Controls.Add(installButton);
+        this.Controls.Add(closeButton);
     }
 
     private CheckedListBox CreateCheckedListBox(string label, int x, int y)
@@ -62,25 +69,25 @@ public class MainForm : Form
         return checkedListBox;
     }
 
-private void DisplayProfiles(string profileType, CheckedListBox checkedListBox)
-{
-    string programFolderPath = AppDomain.CurrentDomain.BaseDirectory;
-    string profilesFolderPath = Path.Combine(programFolderPath, "profiles");
-    string profileFolderPath = Path.Combine(profilesFolderPath, profileType);
-
-    if (Directory.Exists(profileFolderPath))
+    private void DisplayProfiles(string profileType, CheckedListBox checkedListBox)
     {
-        string[] profileFiles = Directory.GetFiles(profileFolderPath, "*.ini")
-                                          .Select(Path.GetFileNameWithoutExtension)
-                                          .ToArray();
+        string programFolderPath = AppDomain.CurrentDomain.BaseDirectory;
+        string profilesFolderPath = Path.Combine(programFolderPath, "profiles");
+        string profileFolderPath = Path.Combine(profilesFolderPath, profileType);
 
-        checkedListBox.Items.AddRange(profileFiles.Cast<object>().ToArray());
+        if (Directory.Exists(profileFolderPath))
+        {
+            string[] profileFiles = Directory.GetFiles(profileFolderPath, "*.ini")
+                                              .Select(Path.GetFileNameWithoutExtension)
+                                              .ToArray();
+
+            checkedListBox.Items.AddRange(profileFiles.Cast<object>().ToArray());
+        }
+        else
+        {
+            checkedListBox.Items.Add($"No {profileType} profiles found.", false);
+        }
     }
-    else
-    {
-        checkedListBox.Items.Add($"No {profileType} profiles found.", false);
-    }
-}
 
     private void InstallButton_Click(object sender, EventArgs e)
     {
@@ -126,5 +133,10 @@ private void DisplayProfiles(string profileType, CheckedListBox checkedListBox)
     private bool AnyProfileSelected()
     {
         return printerListBox.CheckedItems.Count > 0 || filamentListBox.CheckedItems.Count > 0 || printListBox.CheckedItems.Count > 0;
+    }
+
+    private void CloseButton_Click(object sender, EventArgs e)
+    {
+        this.Close();
     }
 }

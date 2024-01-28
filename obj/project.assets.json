@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Work\\GitHub\\EZProfiles\\EZProfiles\\EZProfiles.csproj",
+      "projectUniqueName": "D:\\Work\\GitHub\\EZProfiles-for-PrusaSlicer\\EZProfiles.csproj",
       "projectName": "EZProfiles",
-      "projectPath": "D:\\Work\\GitHub\\EZProfiles\\EZProfiles\\EZProfiles.csproj",
+      "projectPath": "D:\\Work\\GitHub\\EZProfiles-for-PrusaSlicer\\EZProfiles.csproj",
       "packagesPath": "C:\\Users\\timot\\.nuget\\packages\\",
-      "outputPath": "D:\\Work\\GitHub\\EZProfiles\\EZProfiles\\obj\\",
+      "outputPath": "D:\\Work\\GitHub\\EZProfiles-for-PrusaSlicer\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\timot\\AppData\\Roaming\\NuGet\\NuGet.Config"

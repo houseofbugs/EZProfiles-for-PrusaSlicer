@@ -14,6 +14,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = EZProfiles
-build_property.ProjectDir = D:\Work\GitHub\EZProfiles\EZProfiles\
+build_property.ProjectDir = D:\Work\GitHub\EZProfiles-for-PrusaSlicer\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
