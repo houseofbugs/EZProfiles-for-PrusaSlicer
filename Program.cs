@@ -24,7 +24,6 @@ public class MainForm : Form
     public MainForm()
     {
         InitializeComponents();
-        LoadBrands();
         DisplayProfiles("printer", printerListBox);
         DisplayProfiles("filament", filamentListBox);
         DisplayProfilesByBrand("printer", printerListBox, brandComboBox.SelectedItem?.ToString());
