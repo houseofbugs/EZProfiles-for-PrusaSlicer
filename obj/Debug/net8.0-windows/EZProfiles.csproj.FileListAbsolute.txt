@@ -1,0 +1,14 @@
+D:\Work\GitHub\EZProfiles\EZProfiles\bin\Debug\net8.0-windows\EZProfiles.exe
+D:\Work\GitHub\EZProfiles\EZProfiles\bin\Debug\net8.0-windows\EZProfiles.deps.json
+D:\Work\GitHub\EZProfiles\EZProfiles\bin\Debug\net8.0-windows\EZProfiles.runtimeconfig.json
+D:\Work\GitHub\EZProfiles\EZProfiles\bin\Debug\net8.0-windows\EZProfiles.dll
+D:\Work\GitHub\EZProfiles\EZProfiles\bin\Debug\net8.0-windows\EZProfiles.pdb
+D:\Work\GitHub\EZProfiles\EZProfiles\obj\Debug\net8.0-windows\EZProfiles.GeneratedMSBuildEditorConfig.editorconfig
+D:\Work\GitHub\EZProfiles\EZProfiles\obj\Debug\net8.0-windows\EZProfiles.AssemblyInfoInputs.cache
+D:\Work\GitHub\EZProfiles\EZProfiles\obj\Debug\net8.0-windows\EZProfiles.AssemblyInfo.cs
+D:\Work\GitHub\EZProfiles\EZProfiles\obj\Debug\net8.0-windows\EZProfiles.csproj.CoreCompileInputs.cache
+D:\Work\GitHub\EZProfiles\EZProfiles\obj\Debug\net8.0-windows\EZProfiles.dll
+D:\Work\GitHub\EZProfiles\EZProfiles\obj\Debug\net8.0-windows\refint\EZProfiles.dll
+D:\Work\GitHub\EZProfiles\EZProfiles\obj\Debug\net8.0-windows\EZProfiles.pdb
+D:\Work\GitHub\EZProfiles\EZProfiles\obj\Debug\net8.0-windows\EZProfiles.genruntimeconfig.cache
+D:\Work\GitHub\EZProfiles\EZProfiles\obj\Debug\net8.0-windows\ref\EZProfiles.dll
